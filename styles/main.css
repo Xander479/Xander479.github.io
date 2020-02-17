@@ -6,7 +6,9 @@ body {
 }
 
 footer {
+	background-color: #353535;
 	bottom: 0;
+	color: #c4c4c4;
 	font-size: 13px;
 	position: fixed;
 	text-align: center;
@@ -45,10 +47,11 @@ ul {
 
 .menuitem {
 	text-decoration: none;
-	transition: transform 0.1s;
+	transition: color 0.3s, transform 0.1s;
 }
 
 .menuitem:hover {
+	color: #000033;
 	transform: translate(0, 2px);
 }
 
