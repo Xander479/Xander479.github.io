@@ -61,14 +61,15 @@ ul {
 	margin: 0;
 }
 
-.column {
+.box {
 	background-image: linear-gradient(135deg, #b1b1b1, #919191);
 	border: 10px outset #353535;
 	border-radius: 20px;
 	height: 100%;
 	margin: auto;
+	overflow: auto;
 	padding: 5px;
-	width: 500px;
+	width: 30%;
 }
 
 .flexbox {
