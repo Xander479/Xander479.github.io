@@ -1,3 +1,8 @@
+@keyframes e {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
 a:hover {
 	color: white;
 	text-decoration: none;
@@ -6,7 +11,7 @@ a:hover {
 body {
 	background-color: #a1a1a1;
 	font-family: monospace;
-	font-size: 14px;
+	font-size: 16px;
 	margin: 0;
 }
 
@@ -50,7 +55,31 @@ nav {
 	height: 100%;
 	position: fixed;
 	text-align: right;
+	transition: width 0.3s;
+	transition-timing-function: ease-out;
+	width: 30px;
+}
+
+nav:hover {
 	width: 300px;
+}
+
+nav:hover .menuitem {
+	animation-delay: 0.2s;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-name: e;
+	display: block;
+	opacity: 0;
+}
+
+nav:hover #current {
+	animation-delay: 0.2s;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-name: e;
+	display: block;
+	opacity: 0;
 }
 
 p {
@@ -76,7 +105,18 @@ ul {
 	display: flex;
 }
 
+.floatleft {
+	float: left;
+	margin-right: 20px;
+}
+
+.floatright {
+	float: right;
+	margin-left: 20px;
+}
+
 .menuitem {
+	display: none;
 	text-decoration: none;
 	transition: color 0.3s, transform 0.1s;
 }
@@ -86,7 +126,22 @@ ul {
 	transform: translate(0, 2px);
 }
 
+#arrow {
+	font-size: 30px;
+	margin-bottom: 0;
+}
+
+#avatar {
+	border-radius: 50%;
+	height: 75px;
+}
+
 #current {
+	display: none;
 	font-size: 23px;
 	font-style: italic;
+}
+
+#twitch {
+	height: 75px;
 }
