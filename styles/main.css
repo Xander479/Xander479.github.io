@@ -3,26 +3,33 @@
 	to {opacity: 1;}
 }
 
-a:hover {
+a {
 	color: white;
+	transition: color 0.15s;
+}
+
+a:hover {
+	color: #000033;
 	text-decoration: none;
 }
 
 body {
-	background-color: #a1a1a1;
-	font-family: monospace;
-	font-size: 16px;
+	background-image: linear-gradient(to right, #00624B, #19A27B);
+	font-family: Inconsolata, monospace;
+	font-size: 18px;
 	margin: 0;
 }
 
 footer {
-	background-color: #353535;
+	background-image: linear-gradient(to top, #353535 90%, black);
 	bottom: 0;
 	color: #c4c4c4;
-	font-size: 13px;
+	font-size: 14px;
+	height: 40px;
 	position: fixed;
 	text-align: center;
 	width: 100%;
+	z-index: 0;
 }
 
 h1 {
@@ -38,28 +45,31 @@ h2 {
 
 li {
 	color: #ddddee;
-	font-size: 18px;
+	font-size: 20px;
 	list-style: none;
 	padding: 15px;
 }
 
 main {
 	margin: 0 250px;
+	transition: background-color 0.3s;
 	width: 100%;
 }
 
 nav {
-	background-image: linear-gradient(to right, #5a5a5a 98.5%, black);
-	background-color: #5a5a5a;
+	background-color: #353535;
+	border-right: 2px solid rgba(0,0,0,0.75);
 	height: 100%;
 	position: fixed;
 	text-align: right;
-	transition: width 0.3s;
+	transition: border-right 0.3s, width 0.3s;
 	transition-timing-function: ease-out;
 	width: 30px;
 }
 
 nav:hover {
+	background-image: linear-gradient(to right, #353535 98.5%, black);
+	border-right: none;
 	width: 300px;
 }
 
@@ -70,6 +80,10 @@ nav:hover .menuitem {
 	animation-name: e;
 	display: block;
 	opacity: 0;
+}
+
+nav:hover + #buffer {
+	width: 300px;
 }
 
 nav:hover #current {
@@ -90,7 +104,7 @@ ul {
 }
 
 .box {
-	background-image: linear-gradient(135deg, #b1b1b1, #919191);
+	background-image: linear-gradient(to bottom right, #19A27B, #00624B);
 	border: 10px outset #353535;
 	border-radius: 20px;
 	height: 100%;
@@ -135,9 +149,20 @@ ul {
 	height: 75px;
 }
 
+#buffer {
+	background-color: #353535;
+	bottom: 0;
+	height: 40px;
+	position: fixed;
+	transition: width 0.3s;
+	transition-timing-function: ease-out;
+	width: 30px;
+	z-index: 1;
+}
+
 #current {
 	display: none;
-	font-size: 23px;
+	font-size: 25px;
 	font-style: italic;
 }
 
