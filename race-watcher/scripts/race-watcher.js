@@ -24,14 +24,14 @@ function main() {
 			console.log(race);	// For testing purposes
 			// Check if anyone's finished or quit/unquit
 			if(race.entrants_count_finished != finished) {
-				// Someone new finished
+				// Someone finished
 				if(race.entrants_count_finished > finished) {
 					playerFinished(race);
 					finished++;
 				}
 				// .undone
 				else {
-					playerUndone(race);
+					playerUndone(race, 0);
 					finished--;
 				}
 			}
@@ -43,7 +43,7 @@ function main() {
 				}
 				// .unforfeit
 				else {
-					playerUndone(race);
+					playerUndone(race, 1);
 					quit--;
 				}
 			}
@@ -53,32 +53,62 @@ function main() {
 
 function playerFinished(race) {
 	var newDone = "";
-	for(i = 0; i < race.entrants_count_finished; i++) {
+	var racerID = "";
+	for(var i = 0; i < race.entrants_count_finished; i++) {
 		var racer = race.entrants[i];
 		if(racer.status != "done") {
 			continue;
 		}
 		newDone = racer.place_ordinal + " " + racer.user.name + " - " + racer.finish_time;
+		racerID = racer.user.id;
 	}
 	const p = document.createElement("p");
 	p.innerHTML = newDone;
+	p.id = racerID;
 	document.getElementById("done").appendChild(p);
 }
 
 function playerQuit(race) {
 	var newQuit = "";
-	for(i = 0; i < race.entrants_count_inactive; i++) {
+	var racerID = "";
+	for(var i = 0; i < race.entrants_count_inactive; i++) {
 		var racer = race.entrants[i];
 		if(racer.status != "dnf" || racer.status != "dq") {
 			continue;
 		}
 		newQuit = racer.status.verbose_value + " " + racer.user.name;
+		racerID = racer.user.id;
 	}
 	const p = document.createElement("p");
 	p.innerHTML = newQuit;
+	p.id = racerID;
 	document.getElementById("quit").appendChild(p);
 }
 
-function playerUndone(race) {
-	
+// status 0 = .undone; status 1 = .unforfeit
+function playerUndone(race, status) {
+	var statusDiv;
+	switch(status) {
+		case 0:
+			statusDiv = document.getElementById("done");
+			break;
+		case 1:
+			statusDiv = docu.getElementById("quit");
+			break;
+		default:
+			console.log("Invalid value passed to function playerUndone: " + status;
+			return;
+	}
+	// Find the racer who resumed the race
+	for(var i = 0; i < statusDiv.children.length; i++) {
+		for(var j = 0; j < race.entrants; j++) {
+			if(race.entrants[j].status != "in_progress") {
+				continue;	// Only look at racers still racing
+			}
+			if(statusDiv.children[i].id == race.entrants[j].user.id) {
+				statusDiv.children[i].remove();	// Found the racer who resumed the race
+				return;
+			}
+		}
+	}
 }
