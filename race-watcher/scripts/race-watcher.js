@@ -20,7 +20,7 @@ function main() {
 	ws.onmessage = function (event) {
 		// Only bother doing something if it's a race update
 		if(JSON.parse(event.data).type == "race.data") {
-			const race = msg.race;
+			const race = JSON.parse(event.data).race;
 			console.log(race);	// For testing purposes
 			// Check if anyone's finished or quit/unquit
 			if(race.entrants_count_finished != finished) {
