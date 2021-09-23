@@ -72,7 +72,7 @@ function playerQuit(race) {
 		if(racer.status != "dnf" || racer.status != "dq") {
 			continue;
 		}
-		newQuit = racer.status + " " + racer.user.name;
+		newQuit = racer.status.verbose_value + " " + racer.user.name;
 	}
 	const p = document.createElement("p");
 	p.innerHTML = newQuit;
