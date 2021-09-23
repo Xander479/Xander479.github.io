@@ -96,7 +96,7 @@ function playerUndone(race, status) {
 			statusDiv = docu.getElementById("quit");
 			break;
 		default:
-			console.log("Invalid value passed to function playerUndone: " + status;
+			console.log("Invalid value passed to function playerUndone: " + status);
 			return;
 	}
 	// Find the racer who resumed the race
