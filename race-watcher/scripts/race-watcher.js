@@ -54,9 +54,9 @@ function main() {
 function playerFinished(race) {
 	var newDone = "";
 	var racerID = "";
-	for(var i = 0; i < race.entrants_count_finished; i++) {
+	for(var i = 0; i < race.entrants; i++) {
 		var racer = race.entrants[i];
-		if(racer.status != "done") {
+		if(racer.status.value != "done") {
 			continue;
 		}
 		newDone = racer.place_ordinal + " " + racer.user.name + " - " + racer.finish_time;
@@ -71,9 +71,9 @@ function playerFinished(race) {
 function playerQuit(race) {
 	var newQuit = "";
 	var racerID = "";
-	for(var i = 0; i < race.entrants_count_inactive; i++) {
+	for(var i = 0; i < race.entrants; i++) {
 		var racer = race.entrants[i];
-		if(racer.status != "dnf" || racer.status != "dq") {
+		if(racer.status.value != "dnf" || racer.status.value != "dq") {
 			continue;
 		}
 		newQuit = racer.status.verbose_value + " " + racer.user.name;
