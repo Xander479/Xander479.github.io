@@ -114,7 +114,7 @@ function playerUndone(race, status) {
 }
 
 function formatDuration(duration) {
-	const time = duration.substring(indexOf("T") + 1);
+	const time = duration.substring(duration.indexOf("T") + 1);
 	// Parse hours
 	var hours = time.substring(0, time.indexOf("H"));
 	if(hours.substring(0, 1) == "0") {
