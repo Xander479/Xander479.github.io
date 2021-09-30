@@ -54,12 +54,12 @@ function main() {
 function playerFinished(race) {
 	var newDone = "";
 	var racerID = "";
-	for(var i = 0; i < race.entrants; i++) {
+	for(var i = 0; i < race.entrants_count; i++) {
 		var racer = race.entrants[i];
 		if(racer.status.value != "done") {
 			continue;
 		}
-		newDone = racer.place_ordinal + " " + racer.user.name + " - " + racer.finish_time;
+		newDone = racer.place_ordinal + " " + racer.user.name + " - " + formatDuration(racer.finish_time);
 		racerID = racer.user.id;
 	}
 	const p = document.createElement("p");
@@ -71,7 +71,7 @@ function playerFinished(race) {
 function playerQuit(race) {
 	var newQuit = "";
 	var racerID = "";
-	for(var i = 0; i < race.entrants; i++) {
+	for(var i = 0; i < race.entrants_count; i++) {
 		var racer = race.entrants[i];
 		if(racer.status.value != "dnf" || racer.status.value != "dq") {
 			continue;
@@ -93,7 +93,7 @@ function playerUndone(race, status) {
 			statusDiv = document.getElementById("done");
 			break;
 		case 1:
-			statusDiv = docu.getElementById("quit");
+			statusDiv = document.getElementById("quit");
 			break;
 		default:
 			console.log("Invalid value passed to function playerUndone: " + status);
@@ -111,4 +111,49 @@ function playerUndone(race, status) {
 			}
 		}
 	}
+}
+
+function formatDuration(duration) {
+	const time = duration.substring(indexOf("T") + 1);
+	// Parse hours
+	var hours = time.substring(0, time.indexOf("H"));
+	if(hours.substring(0, 1) == "0") {
+		hours = hours.substring(1);
+	}
+	// Parse minutes
+	var minutes = time.substring(time.indexOf("H") + 1, time.indexOf("M"));
+	// Parse seconds
+	var seconds = time.substring(time.indexOf("M") + 1, time.indexOf("."));
+	
+	if(hours == "0") {
+		return minutes + ":" + seconds;
+	}
+	return hours + ":" + minutes + ":" + seconds;
+}
+
+// Show what the page will look like after a few racers have finished, for cropping purposes etc
+function testClick() {
+	// Hide slug form
+	var toHide = document.getElementsByClassName('show');
+	for(var len = toHide.length; len > 0; len--) {
+		document.getElementsByClassName('show')[0].className = 'hidden';
+	}
+	
+	// Create a couple of dummy race times
+	const racer1 = document.createElement("p");
+	racer1.innerHTML = "1st Racer1 - 1:23:45";
+	racer1.id = "test1";
+	
+	const racer2 = document.createElement("p");
+	racer2.innerHTML = "dnf Racer2";
+	racer2.id = "test2";
+	
+	const racer3 = document.createElement("p");
+	racer3.innerHTML = "2nd Racer3 - 1:25:55";
+	racer3.id = "test3";
+	
+	// Add racers to the page
+	document.getElementById("done").appendChild(racer1);
+	document.getElementById("quit").appendChild(racer2);
+	document.getElementById("done").appendChild(racer3);
 }
