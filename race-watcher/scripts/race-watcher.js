@@ -113,7 +113,8 @@ function playerUndone(race, status) {
 				continue;	// Only look at racers still racing
 			}
 			if(statusDiv.children[i].id == race.entrants[j].user.id) {
-				statusDiv.children[i].remove();	// Found the racer who resumed the race
+				statusDiv.children[i].classList.add("invisible");
+				setTimeout(statusDiv.children[i].remove(), 500);	// Found the racer who resumed the race
 				return;
 			}
 		}
