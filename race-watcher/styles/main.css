@@ -5,3 +5,12 @@
 .hidden {
 	display: none;
 }
+
+.invisible.entrants {
+	opacity: 0;
+	margin-left: 30px;
+}
+
+.entrants {
+	transition: opacity .5s, margin-left 1s;
+}

@@ -1,12 +1,17 @@
 function main() {
+	// Don't do anything if the slug field is empty
+	if(document.getElementById("slug").value == "") {
+		return;
+	}
+	
 	// Hide slug form
-	var toHide = document.getElementsByClassName('show');
+	var toHide = document.getElementsByClassName("show");
 	for(var len = toHide.length; len > 0; len--) {
-		document.getElementsByClassName('show')[0].className = 'hidden';
+		document.getElementsByClassName("show")[0].className = "hidden";
 	}
 	
 	// Set up websocket
-	const wsURL = "wss://racetime.gg/ws/race/" + document.getElementById('slug').value;
+	const wsURL = "wss://racetime.gg/ws/race/" + document.getElementById("slug").value;
 	var ws = new WebSocket(wsURL);
 	ws.onopen = function () {
 		console.log("connection opened");
@@ -66,6 +71,7 @@ function playerFinished(race) {
 	p.innerHTML = newDone;
 	p.id = racerID;
 	document.getElementById("done").appendChild(p);
+	show(p);
 }
 
 function playerQuit(race) {
@@ -83,6 +89,7 @@ function playerQuit(race) {
 	p.innerHTML = newQuit;
 	p.id = racerID;
 	document.getElementById("quit").appendChild(p);
+	show(p);
 }
 
 // status 0 = .undone; status 1 = .unforfeit
@@ -131,12 +138,19 @@ function formatDuration(duration) {
 	return hours + ":" + minutes + ":" + seconds;
 }
 
+function show(element) {
+	element.classList.add("invisible", "entrants");
+	requestAnimationFrame(() => {
+		element.classList.remove("invisible");
+	});
+}
+
 // Show what the page will look like after a few racers have finished, for cropping purposes etc
 function testClick() {
 	// Hide slug form
-	var toHide = document.getElementsByClassName('show');
+	var toHide = document.getElementsByClassName("show");
 	for(var len = toHide.length; len > 0; len--) {
-		document.getElementsByClassName('show')[0].className = 'hidden';
+		document.getElementsByClassName("show")[0].className = "hidden";
 	}
 	
 	// Create a couple of dummy race times
@@ -156,4 +170,7 @@ function testClick() {
 	document.getElementById("done").appendChild(racer1);
 	document.getElementById("quit").appendChild(racer2);
 	document.getElementById("done").appendChild(racer3);
+	show(racer1);
+	show(racer2);
+	show(racer3);
 }
