@@ -112,9 +112,9 @@ function playerUndone(race, status) {
 			if(race.entrants[j].status != "in_progress") {
 				continue;	// Only look at racers still racing
 			}
-			if(statusDiv.children[i].id == race.entrants[j].user.id) {
+			if(statusDiv.children[i].id == race.entrants[j].user.id) {	// Found the racer who resumed the race
 				statusDiv.children[i].classList.add("invisible");
-				setTimeout(statusDiv.children[i].remove(), 500);	// Found the racer who resumed the race
+				setTimeout(statusDiv.children[i].remove(), 500);
 				return;
 			}
 		}
