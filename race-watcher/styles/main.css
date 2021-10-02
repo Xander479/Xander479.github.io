@@ -19,7 +19,8 @@
 .entrants {
 	color: white;
 	font-family: DiscotecaFixed;
-	font-size: 20px;
-	text-shadow: -1px 1px black, 1px 1px black, 1px -1px black, -1px -1px black;
+	font-size: 30px;
+	text-shadow: -1px 1px black, 1px 1px black, 1px -1px black, -1px -1px black,
+		0 1px black, 1px 0 black, 0 -1px black, -1px 0 black;
 	transition: opacity .5s, margin-left 1s;
 }
