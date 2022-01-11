@@ -21,7 +21,10 @@ function getAiringAnime(user) {
 	const clientID = 'b0e1dd7d4941dbe567caa1aaa6da94c5';
 
 	window
-		.fetch(url, { headers: { 'X-MAL-CLIENT-ID': clientID } })
+    .fetch(url, {
+      method: 'GET',
+      headers: { 'X-MAL-CLIENT-ID': clientID }
+    })
 		.then(function (res) {
 			// Make sure response status is OK
 			if (res.status !== 200) {
