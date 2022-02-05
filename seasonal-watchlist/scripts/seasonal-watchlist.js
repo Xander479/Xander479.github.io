@@ -21,18 +21,21 @@ function getAiringAnime(user) {
 	const clientID = 'b0e1dd7d4941dbe567caa1aaa6da94c5';
 
 	window
-    .fetch(url, {
-      method: 'GET',
-      headers: { 'X-MAL-CLIENT-ID': clientID }
-    })
+		.fetch(url, {
+			method: 'GET',
+			headers: { 'X-MAL-CLIENT-ID': clientID },
+			mode: 'cors'
+		})
 		.then(function (res) {
 			// Make sure response status is OK
 			if (res.status !== 200) {
 				console.error(`Error fetching list. Status code: ${res.status}`);
+				console.error(`Error message: ${res.statusText}`);
 				return;
 			}
 			res.json().then(function (data) {
 				console.log(data);
 			});
-		});
+		})
+		.catch((err) => console.log(err));
 }
